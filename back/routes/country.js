@@ -5,7 +5,8 @@ var { Country } = require('../models');
 
 router.get('/', async (req,res) => {
     try {
-        const country = await db.country.findAll();
+        const country = await db.Country.findAll({});
+
         if(!country){
             return res.status(404).send('등록된 국가가 없습니다.');
         }
@@ -26,11 +27,11 @@ router.post('/', async (req,res,next) => {
             name : req.body.name,
             url : req.body.url
         });
-        console.log(newCountry);
+        console.log(newCountry.name);
         return res.status(201).json(newCountry);
     } catch(err){
         console.log(err);
-        return next(e);
+        return next(err);
     }
 
 });

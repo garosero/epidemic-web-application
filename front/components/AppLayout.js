@@ -29,7 +29,7 @@ const AppLayout = ({children}) => {
                 </Menu.Item>
             </UpMenu> 
             <Row gutter={10}>
-                <Col xs={24} md={3}>
+                <Col xs={24} md={3} style={{padding : 10}}>
                     <Menu mode="inline">
                         <Menu.Item>option1</Menu.Item>
                         <Menu.Item>option1</Menu.Item>
