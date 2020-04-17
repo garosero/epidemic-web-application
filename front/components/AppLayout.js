@@ -1,49 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { Menu, Input, Row, Col } from 'antd';
+import { Menu, Input, Row, Col,Layout } from 'antd';
 import styled from 'styled-components';
 import WorldMap from './WorldMap';
+const { Header, Footer, Sider, Content } = Layout;
+import './index.css';
 
 const UpMenu = styled(Menu)`
-    background : #ffffff;
     text-align : right;
-    height : 60px;
-    margin-top : 1rem;
-    margin-bottom : 1rem;
+    height : 50px;
 `;
 
-const Overlay = styled.div`
-    background-color: #dee2e6;
-`;
+// const Overlay = styled.div`
+//     background-color: #dee2e6;
+// `;
 
-const { SubMenu } = Menu;
 
 const AppLayout = ({children}) => {
     return (
-        <Overlay>
-            <UpMenu className="menu" inlineIndent={20} mode="horizontal">
-                <Menu.Item key="home"><Link href="/"><a>국내</a></Link></Menu.Item>
-                <Menu.Item key="abroad"><Link href="/profile"><a>국외</a></Link></Menu.Item>
-                <Menu.Item key="mail">
-                    <Input.Search enterButton style={{ verticalAlign: 'middle'}} />
-                </Menu.Item>
-            </UpMenu> 
-            <Row gutter={10}>
-                <Col xs={24} md={6} style={{padding : 10}}>
-                    <Menu mode="inline">
-                        <Menu.Item>option1</Menu.Item>
-                        <Menu.Item>option1</Menu.Item>
-                    </Menu>
-                </Col>
-                <Col xs={24} md={12}>
-                    <WorldMap />
-                </Col>
-                <Col xs={24} md={6}>
-                    
-                </Col>
-           </Row>
-        </Overlay>
+        <div>
+            <Layout>
+                <UpMenu className="menu" inlineIndent={20} mode="horizontal">
+                    <Menu.Item key="home"><Link href="/"><a>Home</a></Link></Menu.Item>
+                    <Menu.Item key="abroad"><Link href="/abroad"><a>국외</a></Link></Menu.Item>
+                    <Menu.Item key="mail">
+                        <Input.Search enterButton style={{ verticalAlign: 'middle'}} />
+                    </Menu.Item>
+                </UpMenu> 
+                <div id="top-top">
+                    <h1 id="top-title" align="center">
+                    Disease Information Web
+                    </h1>
+                </div>
+                <div>
+                        <Row>
+                            {/* <Col span={16} push={8}>
+                            <div>                abcd</div>
+                            </Col>
+
+                            <Col span={8} pull={16} padding={2}>
+                            <WorldMap />
+                            </Col> */}
+                            {children}
+                    </Row>
+                </div>
+
+                <Footer>
+                    Footer
+                </Footer>
+            </Layout> 
+        </div>
 
     );
 };

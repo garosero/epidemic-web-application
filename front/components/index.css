@@ -1,0 +1,27 @@
+.map-selected {
+    fill: #E3DA37;
+  }
+  
+  .map-unselected {
+    fill: #699EAA;
+  }
+  
+  .map-selected:hover, .map-unselected:hover {
+    cursor: pointer;
+  }
+
+  #top-top {
+    display:block;
+    background : #ffffff;
+    width : 100%;
+    height : 250px;
+    margin-bottom:20px;
+  }
+
+  #top-title {
+    text-align : center;
+    padding-top : 50px;
+    margin-bottom : 28px;
+    font-size : 1.9rem;
+    color : #000000;
+  }

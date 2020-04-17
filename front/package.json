@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/icons": "^4.0.6",
     "@crpt/react-svg-map": "0.0.22",
     "@south-paw/react-vector-maps": "^3.0.0",
     "@svg-maps/italy": "^1.0.0",
@@ -27,6 +28,7 @@
     "react-helmet": "^6.0.0",
     "react-naver-maps": "0.0.13",
     "react-svg-map": "^2.0.2",
+    "react-svg-tooltip": "0.0.11",
     "react-world-countries-map": "^1.0.9",
     "react-world-map": "^1.0.13",
     "styled-components": "^5.0.1",
