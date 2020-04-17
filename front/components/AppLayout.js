@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Menu, Input, Row, Col } from 'antd';
 import styled from 'styled-components';
+import WorldMap from './WorldMap';
 
 const UpMenu = styled(Menu)`
     background : #ffffff;
@@ -29,14 +30,17 @@ const AppLayout = ({children}) => {
                 </Menu.Item>
             </UpMenu> 
             <Row gutter={10}>
-                <Col xs={24} md={3} style={{padding : 10}}>
+                <Col xs={24} md={6} style={{padding : 10}}>
                     <Menu mode="inline">
                         <Menu.Item>option1</Menu.Item>
                         <Menu.Item>option1</Menu.Item>
                     </Menu>
                 </Col>
-                <Col xs={24} md={18}>
-                    {children}
+                <Col xs={24} md={12}>
+                    <WorldMap />
+                </Col>
+                <Col xs={24} md={6}>
+                    
                 </Col>
            </Row>
         </Overlay>

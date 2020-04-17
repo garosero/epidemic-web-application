@@ -11,12 +11,26 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@crpt/react-svg-map": "0.0.22",
+    "@south-paw/react-vector-maps": "^3.0.0",
+    "@svg-maps/italy": "^1.0.0",
+    "@svg-maps/taiwan": "^1.1.0",
+    "@svg-maps/world": "^1.0.0",
+    "@zeit/next-css": "^1.0.1",
     "antd": "^4.1.0",
     "axios": "^0.19.2",
+    "global": "^4.4.0",
+    "google-maps-react": "^2.0.2",
     "next": "^9.3.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "styled-components": "^5.0.1"
+    "react-helmet": "^6.0.0",
+    "react-naver-maps": "0.0.13",
+    "react-svg-map": "^2.0.2",
+    "react-world-countries-map": "^1.0.9",
+    "react-world-map": "^1.0.13",
+    "styled-components": "^5.0.1",
+    "svgmap": "^1.4.2"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
