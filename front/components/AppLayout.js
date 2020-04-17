@@ -23,7 +23,8 @@ const AppLayout = ({children}) => {
             <Layout>
                 <UpMenu className="menu" inlineIndent={20} mode="horizontal">
                     <Menu.Item key="home"><Link href="/"><a>Home</a></Link></Menu.Item>
-                    <Menu.Item key="abroad"><Link href="/abroad"><a>국외</a></Link></Menu.Item>
+                    <Menu.Item key="continent"><Link href="/continent"><a>대륙별</a></Link></Menu.Item>
+                    <Menu.Item key="country"><Link href="/country"><a>국가별</a></Link></Menu.Item>
                     <Menu.Item key="mail">
                         <Input.Search enterButton style={{ verticalAlign: 'middle'}} />
                     </Menu.Item>

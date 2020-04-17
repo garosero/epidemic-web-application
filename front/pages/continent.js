@@ -1,7 +1,7 @@
 import React from 'react';
 import WorldMap from '../components/WorldMap';
 
-const abroad = ()=> {
+const continent = ()=> {
     return (
         <>
             <WorldMap />
@@ -9,4 +9,4 @@ const abroad = ()=> {
     );
 }
 
-export default abroad;
+export default continent;
