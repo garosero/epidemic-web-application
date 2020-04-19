@@ -20,14 +20,22 @@ router.get('/', async (req,res) => {
     };
 });
 
+// router.get('/', async function(req,res,next){
+//     let result = await db.Country.findAll();
+//     if(result){
+
+//     }
+// });
+
 router.post('/', async (req,res,next) => {
     
     try{
         const newCountry = await db.Country.create({
-            name : req.body.name,
-            url : req.body.url
+            country_name : req.body.country_name,
+            population : req.body.population,
+            continent : req.body.continent
         });
-        console.log(newCountry.name);
+        console.log(newCountry.country_name);
         return res.status(201).json(newCountry);
     } catch(err){
         console.log(err);

@@ -2,31 +2,20 @@
 
 module.exports = (sequelize,DataTypes)=> {
     const Diseases = sequelize.define('Diseases', {
-        name : {
+        disease_name : {
             type: DataTypes.STRING(20),
             allowNull:false,
             unique:true,
-        },
-        date : {
-           type : DataTypes.DATE,
-           allowNull:false,
-       },
-       death : {
-           type: DataTypes.DECIMAL,
-           allowNull:false,
-       },
-       recovered : {
-            type: DataTypes.DECIMAL,
-            allowNull:false,
-       }
+        }
 
     }, {
         charset:'utf8',
         collate: 'utf8_general_ci'
     });
 
-    Diseases.associae = (db) => {
-
+    Diseases.associate = (db) => {
+        db.Diseases.hasMany(db.Case,{sourceKey:'disease_name'});
+        db.Diseases.belongsTo(db.Country,{foreignKey:'fk_country_name',sourceKey:'country_name'});
     };
 
     return Diseases;

@@ -5,6 +5,7 @@ var cors = require('cors');
 db.sequelize.sync(); //
 const countryAPIRouter = require('./routes/country');
 const diseaseAPIRouter = require('./routes/disease');
+const caseAPIRouter = require('./routes/case');
 
 
 app.get('/',(req,res) => {
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended : false}));
 app.use(cors()); //CORS 설정 
 app.use('/api/country',countryAPIRouter);
 app.use('/api/disease',diseaseAPIRouter);
+app.use('/api/case',caseAPIRouter);
 
 app.listen(8080, ()=> {
     console.log('server is running on localhost:8080');

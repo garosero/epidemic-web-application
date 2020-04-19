@@ -18,7 +18,7 @@ Object.keys(db).forEach(modelName => {
 });
 
 db.Country = require('./country')(sequelize,Sequelize);
-db.Data = require('./Data')(sequelize,Sequelize);
+db.Case = require('./case')(sequelize,Sequelize);
 db.Diseases = require('./diseases')(sequelize,Sequelize);
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
