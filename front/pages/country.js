@@ -1,10 +1,11 @@
 import React from 'react';
-import CountryChart from '../components/CountryChart';
+import CountryMap from '../components/CountryMap';
+//import CountryChart from '../components/CountryChart';
 
 const country = () => {
     return (
         <>
-            <CountryChart />
+            <CountryMap />
         </>
     );
 }

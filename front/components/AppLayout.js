@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Menu, Input, Row, Col,Layout } from 'antd';
 import styled from 'styled-components';
-import WorldMap from './WorldMap';
 const { Header, Footer, Sider, Content } = Layout;
 import './index.css';
 

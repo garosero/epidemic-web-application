@@ -1,10 +1,10 @@
 import React from 'react';
-import WorldMap from '../components/WorldMap';
+import ContinentMap from '../components/ContinentMap';
 
 const continent = ()=> {
     return (
         <>
-            <WorldMap />
+            <ContinentMap />
         </>
     );
 }

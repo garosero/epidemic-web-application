@@ -14,7 +14,7 @@
     display:block;
     background : #ffffff;
     width : 100%;
-    height : 250px;
+    height : 150px;
     margin-bottom:20px;
   }
 
@@ -25,3 +25,11 @@
     font-size : 1.9rem;
     color : #000000;
   }
+
+
+
+  .Map svg{
+    width : 700px;
+    height : 500px;
+  }
+  

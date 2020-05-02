@@ -6,7 +6,7 @@ var { Case } = require('../models');
 router.get('/', async(req,res,next)=>{
     try {
         const allCase = await db.Case.findAll({});
-
+ 
         if(!allCase){
             return res.status(404).send('등록된 국가가 없습니다.');
         }

@@ -6,7 +6,7 @@ const World = require('react-world-map');
 
 
 
-const WorldMap = ()=>{
+const ContinentMap = ()=>{
 
   return(
     <div>
@@ -20,4 +20,4 @@ if (typeof window !== 'undefined') {
 
 };
 
-export default WorldMap;
+export default ContinentMap;
