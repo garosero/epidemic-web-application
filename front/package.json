@@ -2,6 +2,9 @@
   "name": "front",
   "version": "1.0.0",
   "description": "",
+  "config" : {
+    "port":"80"
+  },
   "main": "index.js",
   "scripts": {
     "dev": "next",
