@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "next -p 80",
+    "build": "next build",
+    "start": "next start"
   },
   "author": "",
   "license": "ISC",
