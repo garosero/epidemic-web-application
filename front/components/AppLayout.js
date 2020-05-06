@@ -21,12 +21,12 @@ const AppLayout = ({children}) => {
         <div>
             <Layout>
                 <UpMenu className="menu" inlineIndent={20} mode="horizontal">
-                    <Menu.Item key="home"><Link href="/"><a>Home</a></Link></Menu.Item>
-                    <Menu.Item key="continent"><Link href="/continent"><a>대륙별</a></Link></Menu.Item>
-                    <Menu.Item key="country"><Link href="/country"><a>국가별</a></Link></Menu.Item>
-                    <Menu.Item key="mail">
+                    <UpMenu.Item key="home"><Link href="/"><a>Home</a></Link></UpMenu.Item>
+                    <UpMenu.Item key="continent"><Link href="/continent"><a>대륙별</a></Link></UpMenu.Item>
+                    <UpMenu.Item key="country"><Link href="/country"><a>국가별</a></Link></UpMenu.Item>
+                    <UpMenu.Item key="mail">
                         <Input.Search enterButton style={{ verticalAlign: 'middle'}} />
-                    </Menu.Item>
+                    </UpMenu.Item>
                 </UpMenu> 
                 <div id="top-top">
                     <h1 id="top-title" align="center">

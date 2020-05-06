@@ -31,7 +31,7 @@ const CountryMap = ()=>{
 
     useEffect(()=> {
       fetch(
-        `http://localhost:8080/api/case/`,
+        `http://3.23.9.58/api/case/`,
         {
           method : "GET",
           headers: new Headers({
@@ -96,6 +96,7 @@ const CountryMap = ()=>{
             }
           </Col>
         </Row>
+        
       </div>
     </>
     )
