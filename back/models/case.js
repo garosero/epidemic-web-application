@@ -38,7 +38,7 @@ module.exports = (sequelize,DataTypes)=> {
       indexes : [
         {
           unique:true,
-          fields:['country_name','disease_name']
+          fields:['country_name','disease_name','days']
        }
       ]
     },    

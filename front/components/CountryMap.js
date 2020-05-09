@@ -1,14 +1,22 @@
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { VectorMap } from '@south-paw/react-vector-maps';
 import world from './world.json';
 import axios from 'axios';
 import './index.css';
 import styled from 'styled-components';
 import { Menu, Input, Row, Col,Layout } from 'antd';
+// import Chart from './Chart';
+// import C3Chart from 'react-c3js';
+// import 'c3/c3.css';
+import { Line } from "react-chartjs-2"
 
 const CountryMap = ()=>{
-    const[data,setData] = React.useState([]);
+    const [data,setData] = React.useState([]);
+    const [chartObject,setChartObject] = React.useState({});
+    const [hovered, setHovered] = React.useState('None');
+    const [focused, setFocused] = React.useState('None');
+    const [clicked, setClicked] = React.useState('None');
 
      //const [data,setData] = React.useState(null);
     // axios.get('http://localhost:8080/api/case/',{
@@ -20,18 +28,12 @@ const CountryMap = ()=>{
     //     console.log(err);
     // });
 
-   
-    // axios.get('http://localhost:8080/api/case')
-    //       .then(res=>{
-    //         console.log("success : " +res);
-    //         setData(res);
-    //         })
-    //       .catch(res=>{console.log(res)});
-    
 
+   const label = [];
+   const dataset = [];
     useEffect(()=> {
       fetch(
-        `http://3.23.9.58/api/case/`,
+        `http://localhost:8080/api/case/${clicked}`,
         {
           method : "GET",
           headers: new Headers({
@@ -40,14 +42,58 @@ const CountryMap = ()=>{
         }
       ).then(res => res.json())
       .then(response => {
-        setData(response)
+        setData(response);
+      }).then(response => {
+      
+        data.map(item => {
+          label.push(item.days);
+          console.log(item.days);
+          dataset.push(item.confirmed);
+          console.log(item.dataset);
+        })
+        setChartObject({
+          labels : label,
+          datasets : [
+            {
+              label : `${clicked}`,
+              data: dataset
+            }
+          ]
+        })
       })
-    })
+    },[clicked]) //clicked가 바뀔 때마다 실행됨
 
-
-    const [hovered, setHovered] = React.useState('None');
-    const [focused, setFocused] = React.useState('None');
-    const [clicked, setClicked] = React.useState('None');
+    // const changeData = () => {
+    //   fetch(
+    //         `http://localhost:8080/api/case/${clicked}`,
+    //         {
+    //           method : "GET",
+    //           headers: new Headers({
+    //             Accept:"application/json"
+    //           })
+    //         }
+    //       )
+    //   .then(response => {
+    //     setData(response);
+    //   }).then(response => {
+    //     data.map(item => {
+    //       label.push(item.days);
+    //       console.log(item.days);
+    //       dataset.push(item.confirmed);
+    //       console.log(item.dataset);
+    //     })
+    //     setChartObject({
+    //       labels : label,
+    //       datasets : [
+    //         {
+    //           label : `${clicked}`,
+    //           data: dataset
+    //         }
+    //       ]
+    //     })
+    //   })
+     
+    // }
   
     const layerProps = {
       onMouseEnter: ({ target }) => setHovered(target.attributes.name.value),
@@ -68,15 +114,7 @@ const CountryMap = ()=>{
             <p>Hovered: {hovered && <code>{hovered}</code>}</p>
             <p>Focused: {focused && <code>{focused}</code>}</p>
             <p>Clicked: {clicked && <code>{clicked}</code>}</p>
-            {/* data : {
-              data.map(item => {
-               return (
-                 <div key={item.id}>
-                   <p>{item.country_name}</p>
-                 </div>
-               )
-              }) */}
-            {
+            {/* {
               data.map(item =>{
                 return (
                   <div key={item.id}>
@@ -93,7 +131,11 @@ const CountryMap = ()=>{
                   </div>
                 )
               })
+            }  */}
+            {
+              
             }
+            <Line data={chartObject}/>
           </Col>
         </Row>
         
