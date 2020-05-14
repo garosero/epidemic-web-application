@@ -1,7 +1,7 @@
 
 /*model*/
 module.exports = (sequelize,DataTypes)=> {
-    const Case = sequelize.define('Case', {
+    const Cases = sequelize.define('cases', {
        country_name : {
             type: DataTypes.STRING(100),
             allowNull:false,
@@ -18,7 +18,7 @@ module.exports = (sequelize,DataTypes)=> {
     //   }
     
        days : {
-           type: DataTypes.STRING(100),
+           type: DataTypes.DATE,
            allowNull:false,
        },
        confirmed : {
@@ -33,27 +33,33 @@ module.exports = (sequelize,DataTypes)=> {
             type: DataTypes.INTEGER,
             allowNull:false,
        },
-
-    },{
+       
+    },
+    {
+        timestamps : false,
+        tableName : "CASES",
+    },
+    {
       indexes : [
         {
           unique:true,
           fields:['country_name','disease_name','days']
        }
       ]
-    },    
+    },   
     {
         charset:'utf8',
         collate: 'utf8_general_ci'
     }, 
     );
 
-    Case.associate = (db) => {
-        db.Case.belongsTo(db.Country,{foreignKey : 'fk_country_name'}); //{foreignKey:' '}로 외래키이름 설정 가능
-        db.Case.belongsTo(db.Diseases,{foreignKey : 'fk_disease_name'});
+    Cases.associate = (db) => {
+        db.Cases.belongsTo(db.Country,{foreignKey : 'fk_country_name'}); //{foreignKey:' '}로 외래키이름 설정 가능
+        db.Cases.belongsTo(db.Diseases,{foreignKey : 'fk_disease_name'});
     };
+    Cases.removeAttribute('id');
 
-    return Case;
+    return Cases;
 
     //가공되지 않은 국가별 확진자 데이터
 }

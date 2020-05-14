@@ -27,6 +27,27 @@ router.get('/', async (req,res) => {
 //     }
 // });
 
+router.get('/:country_name', async(req,res,next)=> {
+    let searchWord = req.params.country_name;
+
+    try {
+        const country= await db.Country.findAll({
+            where : {
+                country_name : req.params.country_name,
+            }
+        });
+        if(!country){
+            return res.status(404).send('해당 국가 자료가 없습니다.');
+        }
+        res.json(country);
+        console.log(country);
+
+    }catch(err){
+        console.log(err);
+        return next(err)
+    };
+});
+
 router.post('/', async (req,res,next) => {
     
     try{
