@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('back:server');
+
+app.set('port',80);
+
+var server = app.listen(app.get('port'), function(){
+  console.log("Express server listening on port "+server.address().port);
+  debug('Express server listening on port ' + server.address().port);
+})

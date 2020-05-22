@@ -19,11 +19,6 @@ app.get('/',(req,res) => {
     res.send('hello');
 })
 
-// app.use(bodyParser.urlencoded({
-//     extended: true
-// }));
-
-// app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended : false}));
 app.use(cors()); //CORS 설정 
@@ -31,6 +26,6 @@ app.use('/api/country',countryAPIRouter);
 app.use('/api/disease',diseaseAPIRouter);
 app.use('/api/cases',caseAPIRouter);
 
-app.listen(8080, ()=> {
-    console.log('server is running on localhost:8080');
-})
+
+
+module.exports = app;
