@@ -31,5 +31,32 @@
   .Map svg{
     width : 700px;
     height : 500px;
+
   }
+
+  .Map {
+    padding-left : 30px;
+    padding-right : 30px;
+  }
+
   
+
+/* 
+  .country_chart svg {
+    width : 1020px;
+    height : 580px;
+    padding-left : 250px;
+    background-color: #699EAA;
+  }
+   */
+
+    .table {
+  
+      width : 1000px;
+      margin : 0 auto;
+      background-color: #ffffff;
+    }
+
+    .dashboard {
+      padding-bottom: 100px;
+    }

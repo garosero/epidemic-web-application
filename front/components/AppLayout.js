@@ -24,7 +24,6 @@ const AppLayout = ({children}) => {
                     <UpMenu.Item key="home"><Link href="/"><a>Home</a></Link></UpMenu.Item>
                     <UpMenu.Item key="continent"><Link href="/continent"><a>대륙별</a></Link></UpMenu.Item>
                     <UpMenu.Item key="country"><Link href="/country"><a>국가별</a></Link></UpMenu.Item>
-                    <UpMenu.Item key="search"><Link href="/search"><a>검색</a></Link></UpMenu.Item>
                     <UpMenu.Item key="mail">
                         <Input.Search enterButton style={{ verticalAlign: 'middle'}} />
                     </UpMenu.Item>

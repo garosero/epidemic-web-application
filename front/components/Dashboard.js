@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Row, Col, Statistic , Timeline, Button, Card } from 'antd';
 import { ArrowDownOutlined,ArrowUpOutlined} from '@ant-design/icons';
 import styled from 'styled-components'
+import web from '../web_config';
 
 const Padding = styled(Row)`
     padding-top : 30px;
@@ -10,35 +11,46 @@ const Padding = styled(Row)`
 
 
 const Dashboard = ()=> {
-    const [todayData, setTodayData] = useState();
+    const [todayData, setTodayData] = useState({});
     const [yesterData,setYesterData] = useState({});
-    const [url, setUrl] = useState('http://localhost:8080/api/cases/confirmed');
+    const [url, setUrl] = useState(web.base_URI+'/cases/confirmed');
 
-    useEffect(async()=>{
-    
-           const today = await axios('http://localhost:8080/api/cases/confirmed/1');
-            console.log("today" + today.data);
+    useEffect(()=>{
+        const fetchToday = async () => {
+            const today = await axios(url+'/1');
+            console.log("today" + today.data.confirmed);
             setTodayData(today.data);   
+            console.log('base :'+web.base_URI);
+        }
+        
+        fetchToday();
     },[]);
 
-    useEffect(async()=>{
-       const yesterday = await axios('http://localhost:8080/api/cases/confirmed/2')
-        console.log("yesterday" + yesterday.data);
-        setYesterData(yesterday.data);
-    },[])
+    useEffect(()=>{
+        const fetchYesterday = async() => {
+            const yesterday = await axios(url+'/2');
+            console.log("yesterday" + (yesterday.data.confirmed));
+            setYesterData(yesterday.data);
+            
+        };
+        fetchYesterday();
+
+    },[]);
+
+    
 
 
 
     return (
-        <>
+        <div className="dashboard">
         <Padding gutter={16} justify="center">
             <Col span={6}>
             </Col>
             <Col span={6}>
-                <Statistic title="Active Users" value={todayData} />
+                <Statistic title="World Active Cases" value={todayData.confirmed} />
             </Col>
             <Col span={6}>
-                <Statistic title="Account Balance (CNY)" value={112893} precision={2} />
+                <Statistic title="World Death Cases" value={todayData.death} />
                 <Button style={{ marginTop: 16 }} type="primary">
                     Recharge
                 </Button>
@@ -54,10 +66,11 @@ const Dashboard = ()=> {
                     <Card>
                     <Statistic
                         title="Active"
-                        value={todayData - (yesterData - todayData)}
+                        value={((todayData.confirmed/(yesterData.confirmed-todayData.confirmed))-1)*100}
                         precision={2}
                         valueStyle={{ color: '#3f8600' }}
-                        prefix={<ArrowUpOutlined />}
+                        prefix={(yesterData.confirmed-todayData.confirmed) - todayData.confirmed >0 ?
+                            <ArrowDownOutlined/> : <ArrowUpOutlined />}
                         suffix="%"
                     />
                     </Card>
@@ -65,11 +78,12 @@ const Dashboard = ()=> {
                 <Col span={6}>
                     <Card>
                     <Statistic
-                        title="Idle"
-                        value={9.3}
+                        title="death"
+                        value={((todayData.death/(yesterData.death-todayData.death))-1)*100}
                         precision={2}
                         valueStyle={{ color: '#cf1322' }}
-                        prefix={<ArrowDownOutlined />}
+                        prefix={(yesterData.death-todayData.death) -todayData.death > 0 ? 
+                                                         <ArrowDownOutlined/> : <ArrowUpOutlined />}
                         suffix="%"
                     />
                     </Card>
@@ -79,7 +93,7 @@ const Dashboard = ()=> {
             </Padding>
         </div>,
 
-        </>
+        </div>
     );
 }
 

@@ -34,11 +34,24 @@ router.get('/confirmed/1', async(req,res,next)=> {
                 }
             }
         });
-        if(!allConfirmed){
+
+        const allDeath = await db.Cases.sum('death',{
+            where : {
+                days : {
+                    [Op.gte] : moment().subtract(2,'days').toDate()
+                }
+            }
+        })
+
+        if(!allConfirmed || !allDeath){
             return res.status(404).send('전체 확진자수가 없습니다.');
         }
-        res.json(allConfirmed);
-        console.log(allConfirmed);
+        const resObj = {
+            confirmed : allConfirmed,
+            death : allDeath,
+        };
+        res.json(resObj);
+        console.log(resObj);
 
     }catch(err){
         console.log(err);
@@ -55,12 +68,47 @@ router.get('/confirmed/2', async(req,res,next)=> {
                 }
             }
         });
-        if(!allConfirmed){
+
+        const allDeath = await db.Cases.sum('death',{
+            where : {
+                days:{
+                    [Op.gte] : moment().subtract(3,'days').toDate()
+                }
+            }
+        });
+
+        const resObj = {
+            confirmed : allConfirmed,
+            death : allDeath,
+        };
+
+        if(!allConfirmed || !allDeath){
             return res.status(404).send('전체 확진자수가 없습니다.');
         }
-        res.json(allConfirmed);
-        console.log(allConfirmed);
+        res.json(resObj);
+        console.log(resObj);
 
+    }catch(err){
+        console.log(err);
+        return next(err);
+    }
+})
+
+router.get('/allCountry', async(req,res,next)=>{
+    try {
+        const allCountry = await db.Cases.findAll({
+            where : {
+                days : {
+                    [Op.gte] : moment().subtract(2,'days').toDate()
+                }
+            },
+            attributes:['country_name','confirmed','death','recovered'],
+        });
+        if(!allCountry){
+            return res.status(404).send('전체 데이터가 존재하지 않습니다.');
+        }
+        res.json(allCountry);
+        console.log(allCountry);
     }catch(err){
         console.log(err);
         return next(err);

@@ -23,8 +23,8 @@ const CountryChart = ()=>{
   ]
 
 return (
-  <div className="App" >
-     <ReactWorldCountriesMap color="red" title="Top 10 Populous Countries" value-suffix="people" size="lg" data={data} />
+  <div className="country_chart" >
+     <ReactWorldCountriesMap color="red" value-suffix="people" size="lg" data={data} />
   </div>
 )
 

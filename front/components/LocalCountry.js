@@ -10,9 +10,6 @@ const LocalCountry = ({children}) => {
                         .then(console.log(baseUrl+SVGCountry))
                         .catch(err=>console.log("No image"));
 
-    useEffect= async() => {
-        let world = await import
-    }
 
 
 
