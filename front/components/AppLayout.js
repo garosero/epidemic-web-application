@@ -1,33 +1,66 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { Menu, Input, Row, Col,Layout } from 'antd';
+import { Menu, Input, Row, Col,Layout, Cascader } from 'antd';
 import styled from 'styled-components';
 const { Header, Footer, Sider, Content } = Layout;
 import './index.css';
+import {DiseaseContext, DiseaseProvider} from '../context/DiseaseContext';
 
 const UpMenu = styled(Menu)`
     text-align : right;
     height : 50px;
 `;
 
+const UpCascader = styled(Cascader)`
+    text-align : right;
+    height : 50px;
+    padding-top:5px;
+`;
+
 // const Overlay = styled.div`
 //     background-color: #dee2e6;
 // `;
 
+const infectionOptions = [
+    {
+        value : 'covid19',
+        label : 'COVID-19'
+    },
+    {
+        value : 'mers',
+        label : 'MERS'
+    }
+];
+
+// const diseaseContext = createContext({ disease_name : 'covid19'})
+// function onChange(value){
+//     diseaseContext = null;
+//     const diseaseContext = createContext({disease_name : value});
+// }
+
 
 const AppLayout = ({children}) => {
+    const { disease, setDisease } = useContext(DiseaseContext);
+
+    function onChange(value){
+        setDisease(value);
+    }
     return (
-        <div>
+        <div>   
+            <DiseaseProvider>   
             <Layout>
-                <UpMenu className="menu" inlineIndent={20} mode="horizontal">
-                    <UpMenu.Item key="home"><Link href="/"><a>Home</a></Link></UpMenu.Item>
-                    <UpMenu.Item key="continent"><Link href="/continent"><a>대륙별</a></Link></UpMenu.Item>
-                    <UpMenu.Item key="country"><Link href="/country"><a>국가별</a></Link></UpMenu.Item>
-                    <UpMenu.Item key="mail">
-                        <Input.Search enterButton style={{ verticalAlign: 'middle'}} />
-                    </UpMenu.Item>
-                </UpMenu> 
+                <Row>
+                    <Col span={21}>
+                        <UpMenu className="menu" inlineIndent={20} mode="horizontal">
+                            <UpMenu.Item key="home"><Link href="/"><a>Home</a></Link></UpMenu.Item>
+                            <UpMenu.Item key="country"><Link href="/country"><a>Country</a></Link></UpMenu.Item>
+                        </UpMenu>
+                    </Col> 
+                    <Col span={3}>
+                        <UpCascader defaultValue={['COVID-19']} style={{ verticalAlign: 'middle'}} options={infectionOptions} size="large" onChange={onChange}/>
+                    </Col>
+                </Row>
                 <div id="top-top">
                     <h1 id="top-title" align="center">
                     Disease Information Web
@@ -50,6 +83,7 @@ const AppLayout = ({children}) => {
                     Footer
                 </Footer>
             </Layout> 
+            </DiseaseProvider>
         </div>
 
     );

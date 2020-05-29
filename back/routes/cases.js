@@ -25,13 +25,14 @@ router.get('/', async(req,res,next)=>{
 
 //나라별로 오늘날짜의 확진자만 구하기
 //SELECT SUM(confirmed) FROM case where today
-router.get('/confirmed/1', async(req,res,next)=> {
+router.get('/:disease_name/confirmed/1', async(req,res,next)=> {
     try{
         const allConfirmed = await db.Cases.sum('confirmed',{
             where : {
                 days:{
                     [Op.gte] : moment().subtract(2,'days').toDate()
-                }
+                },
+                disease_name : req.params.disease_name,
             }
         });
 
@@ -59,13 +60,14 @@ router.get('/confirmed/1', async(req,res,next)=> {
     }
 })
 
-router.get('/confirmed/2', async(req,res,next)=> {
+router.get('/:disease_name/confirmed/2', async(req,res,next)=> {
     try{
         const allConfirmed = await db.Cases.sum('confirmed',{
             where : {
                 days:{
                     [Op.gte] : moment().subtract(3,'days').toDate()
-                }
+                },
+                disease_name : req.params.disease_name,
             }
         });
 
@@ -94,13 +96,14 @@ router.get('/confirmed/2', async(req,res,next)=> {
     }
 })
 
-router.get('/allCountry', async(req,res,next)=>{
+router.get('/:disease_name/allCountry', async(req,res,next)=>{
     try {
         const allCountry = await db.Cases.findAll({
             where : {
                 days : {
                     [Op.gte] : moment().subtract(2,'days').toDate()
-                }
+                },
+                disease_name : req.params.disease_name,
             },
             attributes:['country_name','confirmed','death','recovered'],
         });
@@ -116,12 +119,13 @@ router.get('/allCountry', async(req,res,next)=>{
 })
 
 
-router.get('/:country_name', async(req,res,next)=> {
+router.get('/:disease_name/:country_name', async(req,res,next)=> {
     let searchWord = req.params.country_name;
 
     try {
         const allCase = await db.Cases.findAll({
             where : {
+                disease_name : req.params.disease_name,
                 country_name : req.params.country_name,
             }
         });

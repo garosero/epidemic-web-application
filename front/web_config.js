@@ -1,3 +1,3 @@
 export default {
-    base_URI : 'http://localhost:8080/api'
+    base_URI : 'http://3.34.3.66:80/api'
 };

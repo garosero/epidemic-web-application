@@ -1,5 +1,5 @@
 
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useContext} from 'react';
 import { VectorMap } from '@south-paw/react-vector-maps';
 import world from '../SVGCountries/world.json';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { Menu, Input, Row, Col,Layout } from 'antd';
 import web from '../web_config';
 import { Line } from "react-chartjs-2"
+import diseaseContext from '../context/DiseaseContext';
 
 const MapCol = styled(Col)`
   svg {
@@ -49,6 +50,7 @@ const CountryMap = ()=>{
     const [hovered, setHovered] = React.useState('None');
     const [focused, setFocused] = React.useState('None');
     const [clicked, setClicked] = React.useState('None');
+    const {disease, setDisease} = useContext(diseaseContext);
 
     const inputRef = useRef();
     const baseUrl = web.base_URI+'/cases/';
@@ -57,8 +59,9 @@ const CountryMap = ()=>{
    const dataset = [];
     useEffect(()=> {
       axios
-      .get(baseUrl + query)
+      .get(baseUrl+disease+query)
       .then(response => {
+        console.log(baseUrl+disease+query);
         setData(response.data);
       }).then(response => {
       
@@ -80,7 +83,7 @@ const CountryMap = ()=>{
       })
     
 
-    },[chartObject]) //clicked가 바뀔 때마다 실행됨
+    },[clicked]) //clicked가 바뀔 때마다 실행됨
  
 
     const handleClick = () => {
@@ -95,7 +98,7 @@ const CountryMap = ()=>{
      // onBlur: ({ target }) => setFocused('None'),
       onClick: ({ target }) => {
          setClicked(target.attributes.name.value)
-         setQuery(target.attributes.name.value)  
+         setQuery("/"+target.attributes.name.value)  
       },
         
     };
