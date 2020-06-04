@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 
-const DiseaseContext = React.createContext({
-    disease : 'covid19',
-    setDisease : ()=>{}
-    
-});
+const DiseaseContext = React.createContext({});
 
 const DiseaseProvider = ({children}) => {
     const [disease, setDisease] = useState('covid19');

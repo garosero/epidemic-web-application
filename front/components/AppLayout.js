@@ -5,9 +5,16 @@ import { Menu, Input, Row, Col,Layout, Cascader } from 'antd';
 import styled from 'styled-components';
 const { Header, Footer, Sider, Content } = Layout;
 import './index.css';
-import {DiseaseContext, DiseaseProvider} from '../context/DiseaseContext';
+import DiseaseContext from '../context/DiseaseContext';
+// import {DiseaseProvider} from '../context/DiseaseContext';
+
 
 const UpMenu = styled(Menu)`
+    item {
+        margin-left : auto;
+        text-align : right;
+
+    }
     text-align : right;
     height : 50px;
 `;
@@ -44,21 +51,23 @@ const AppLayout = ({children}) => {
     const { disease, setDisease } = useContext(DiseaseContext);
 
     function onChange(value){
+        console.log(value);
         setDisease(value);
+        console.log("current : "+disease);
     }
     return (
-        <div>   
-            <DiseaseProvider>   
+        <div>     
             <Layout>
                 <Row>
                     <Col span={21}>
                         <UpMenu className="menu" inlineIndent={20} mode="horizontal">
                             <UpMenu.Item key="home"><Link href="/"><a>Home</a></Link></UpMenu.Item>
                             <UpMenu.Item key="country"><Link href="/country"><a>Country</a></Link></UpMenu.Item>
+                            <UpMenu.Item key="statistics"><Link href="/statistics"><a>Statistics</a></Link></UpMenu.Item>
                         </UpMenu>
                     </Col> 
                     <Col span={3}>
-                        <UpCascader defaultValue={['COVID-19']} style={{ verticalAlign: 'middle'}} options={infectionOptions} size="large" onChange={onChange}/>
+                        <UpCascader style={{ verticalAlign: 'middle'}} options={infectionOptions} size="large" onChange={onChange}/>
                     </Col>
                 </Row>
                 <div id="top-top">
@@ -83,7 +92,6 @@ const AppLayout = ({children}) => {
                     Footer
                 </Footer>
             </Layout> 
-            </DiseaseProvider>
         </div>
 
     );

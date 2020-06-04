@@ -1,12 +1,15 @@
-import React,{useState, useEffect} from 'react' ; 
+import React,{useState, useEffect, useContext} from 'react' ; 
 import axios from 'axios';
 import styled from 'styled-components'
-import web from '../web_config';
 import { Table } from 'antd';
+import DiseaseContext from '../context/DiseaseContext';
+import web from '../web_config'
 
 const CountryTable = () => {
     const [countryData, setCountryData] = useState([]);
+    const { disease, setDisease } = useContext(DiseaseContext);
     const pushData =[];
+    const baseUrl = web.base_URI+'/cases/';
     const columns = [
         {
             title: 'Country',
@@ -38,9 +41,8 @@ const CountryTable = () => {
 
     useEffect(()=>{
         const fetchData = async()=>{
-            const allData = await axios.get('http://localhost:8080/api/cases/allCountry');
+            const allData = await axios.get(baseUrl+disease+'/allCountry');
             setCountryData(allData.data);
-            console.log(allData);
             // allData.map((item)=>{
             //     pushData.push(item);
             //     console.log(item);
@@ -48,7 +50,7 @@ const CountryTable = () => {
 
         }
         fetchData();
-    },[]);
+    },[disease]);
 
     function onChange(pagination, filters, sorter, extra){
         console.log('params',pagination,filters,sorter,extra);

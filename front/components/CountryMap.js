@@ -43,8 +43,9 @@ const MapCol = styled(Col)`
   }
 `;
 
+
 const CountryMap = ()=>{
-    const [data,setData] = React.useState([]);
+    //const [data,setData] = React.useState([]);
     const [query,setQuery] = useState('None');
     const [chartObject,setChartObject] = React.useState({});
     const [hovered, setHovered] = React.useState('None');
@@ -58,37 +59,46 @@ const CountryMap = ()=>{
    const label = [];
    const dataset = [];
     useEffect(()=> {
-      axios
-      .get(baseUrl+disease+query)
-      .then(response => {
-        console.log(baseUrl+disease+query);
-        setData(response.data);
-      }).then(response => {
-      
-        data.map(item => {
-          label.push(item.days);
-          console.log(item.days);
-          dataset.push(item.confirmed);
-          console.log(item.dataset);
-        })
-        setChartObject({
-          labels : label,
-          datasets : [
-            {
-              label : `${clicked}`,
-              data: dataset
-            }
-          ]
-        })
-      })
-    
+        const fetchData = async()=> {
+          var allData = await axios.get(baseUrl+disease+query);
+          //setData(allData.data);
+          if(!allData){
+            console.log("No Data");
+          }
+          const data = allData.data;
+          data.map(item=>{
+            label.push(item.days);
+            dataset.push(item.confirmed);
+          });
+          setChartObject({
+            labels : label,
+            datasets : [
+              {
+                label:`${query.replace('/','')}`,
+                data : dataset
+              }
+            ]
+          })
+        
+        
+        }
 
-    },[clicked]) //clicked가 바뀔 때마다 실행됨
+
+      fetchData();
+        
+        
+       
+    },[clicked,query]) //clicked가 바뀔 때마다 실행됨
  
 
     const handleClick = () => {
       const { current } = inputRef;
-      if (current && current.value) setQuery(current.value);
+      if (current && current.value){ 
+         let countryUpper = current.value[0].toUpperCase();
+         let countryLower = current.value.substr(1); //첫번째 문자 제거
+         console.log("search : "+countryUpper+countryLower.toLowerCase());
+         setQuery("/"+countryUpper+countryLower);
+      }
     };
 
     const layerProps = {
@@ -111,8 +121,8 @@ const CountryMap = ()=>{
              <VectorMap {...world} layerProps={layerProps}/>
           </MapCol>
           <Col span={12}>
-           <input ref={inputRef} type='text' defaultValue={query} />
-           <button onClick={handleClick}>Click</button>
+              <input ref={inputRef} type='text' defaultValue={query}/>
+              <button onClick={handleClick}>Click</button>
             {/* <p>Clicked: {clicked && <code>{clicked}</code>}</p> */}
             {/* {
               data.map(item =>{
@@ -139,6 +149,7 @@ const CountryMap = ()=>{
           </Col>
         </Row>
         
+        
       </div>
     </>
     )
@@ -146,3 +157,5 @@ const CountryMap = ()=>{
 }
 
 export default CountryMap;
+
+//https://dev.to/pallymore/clean-up-async-requests-in-useeffect-hooks-90h

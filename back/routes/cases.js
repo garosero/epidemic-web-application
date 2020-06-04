@@ -44,8 +44,10 @@ router.get('/:disease_name/confirmed/1', async(req,res,next)=> {
             }
         })
 
-        if(!allConfirmed || !allDeath){
+        if(!allConfirmed){
             return res.status(404).send('전체 확진자수가 없습니다.');
+        }else if(!allDeath){
+            return res.status(404).send('전체 사망자수가 없습니다.');
         }
         const resObj = {
             confirmed : allConfirmed,

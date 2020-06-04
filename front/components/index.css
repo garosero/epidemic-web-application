@@ -59,4 +59,14 @@
 
     .dashboard {
       padding-bottom: 100px;
+      
+    }
+
+    
+    .dashboard .dash{
+      border : 0.4em;
+    }
+
+    #todayDate {
+      font-size: 2px;
     }
