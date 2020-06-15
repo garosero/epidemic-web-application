@@ -122,7 +122,7 @@ router.get('/:disease_name/allCountry', async(req,res,next)=>{
 
 
 router.get('/:disease_name/:country_name', async(req,res,next)=> {
-    let searchWord = req.params.country_name;
+    //let searchWord = req.params.country_name;
 
     try {
         const allCase = await db.Cases.findAll({
@@ -134,7 +134,6 @@ router.get('/:disease_name/:country_name', async(req,res,next)=> {
         if(!allCase){
             return res.status(404).send('해당 국가 자료가 없습니다.');
         }
-        console.log("searchWord : "+searchWord);
         res.json(allCase);
         console.log(allCase);
 

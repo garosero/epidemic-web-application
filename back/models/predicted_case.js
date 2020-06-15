@@ -21,8 +21,8 @@ module.exports = (sequelize,DataTypes)=> {
            type: DataTypes.DATE,
            allowNull:false,
        },
-       confirmed : {
-            type : DataTypes.INTEGER,
+       infectious : {
+            type : DataTypes.DOUBLE,
             allowNull:false,
        },
        

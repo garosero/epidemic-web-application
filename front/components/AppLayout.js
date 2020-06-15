@@ -35,8 +35,8 @@ const infectionOptions = [
         label : 'COVID-19'
     },
     {
-        value : 'mers',
-        label : 'MERS'
+        value : 'sars',
+        label : 'SARS'
     }
 ];
 

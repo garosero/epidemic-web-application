@@ -26,7 +26,7 @@ app.use(cors()); //CORS 설정
 app.use('/api/country',countryAPIRouter);
 app.use('/api/disease',diseaseAPIRouter);
 app.use('/api/cases',caseAPIRouter);
-// app.use('/api/predicted',predictedAPIRouter);
+app.use('/api/predicted',predictedAPIRouter);
 
 
 

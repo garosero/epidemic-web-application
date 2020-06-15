@@ -70,3 +70,24 @@
     #todayDate {
       font-size: 2px;
     }
+
+    .middle-chart-1 {
+      width : 800px;
+      margin : 0 auto;
+      margin-top : 100px;
+      margin-bottom: 150px;
+    }
+
+    .middle-chart-2 {
+      width : 800px;
+      margin : 0 auto;
+      margin-bottom: 150px;
+    }
+
+    p {
+      font-size : 20px;
+      text-align: center;
+      margin : 0 auto;
+      font-weight: bold;
+      
+    }

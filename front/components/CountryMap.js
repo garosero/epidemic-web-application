@@ -47,7 +47,10 @@ const MapCol = styled(Col)`
 const CountryMap = ()=>{
     //const [data,setData] = React.useState([]);
     const [query,setQuery] = useState('None');
-    const [chartObject,setChartObject] = React.useState({});
+    const [confirmedChartObject,setConfirmedChartObject] = React.useState({});
+    const [deathChartObject,setDeathChartObject] = React.useState({});
+    const [recoveredChartObject,setRecoveredChartObject] = React.useState({});
+    const [predictedChartObject, setPredictedChartObject] = React.useState({});
     const [hovered, setHovered] = React.useState('None');
     const [focused, setFocused] = React.useState('None');
     const [clicked, setClicked] = React.useState('None');
@@ -57,34 +60,81 @@ const CountryMap = ()=>{
     const baseUrl = web.base_URI+'/cases/';
 
    const label = [];
-   const dataset = [];
+   const confirmedDataset = [];
+   const recoveredDataset = [];
+   const deathDataset = [];
+
+   const label2 = [];
+   const predictedDataset = [];
+
     useEffect(()=> {
         const fetchData = async()=> {
           var allData = await axios.get(baseUrl+disease+query);
-          //setData(allData.data);
           if(!allData){
             console.log("No Data");
           }
-          const data = allData.data;
+          const data = allData.data;  
           data.map(item=>{
             label.push(item.days);
-            dataset.push(item.confirmed);
+            confirmedDataset.push(item.confirmed);
+            recoveredDataset.push(item.recovered);
+            deathDataset.push(item.death);
           });
-          setChartObject({
+          
+          setConfirmedChartObject({
             labels : label,
             datasets : [
               {
                 label:`${query.replace('/','')}`,
-                data : dataset
+                data : confirmedDataset
               }
             ]
-          })
+          });
+          setDeathChartObject({
+            labels : label,
+            datasets : [
+              {
+                label : `${query.replace('/','')}`,
+                data : deathDataset
+              }
+            ]
+          });
+          setRecoveredChartObject({
+            labels : label,
+            datasets : [
+              {
+                label : `${query.replace('/','')}`,
+                data : recoveredDataset
+              }
+            ]
+          });
         
         
         }
+      const sendData = async() =>{
+        var fittingData = await axios.get(web.base_URI+'/predicted/'+disease+query);
+        if(!fittingData){
+          console.log("No Data");
+        }
+        const fitData = fittingData.data;
+        fitData.map(item=>{
+          label2.push(item.days);
+          predictedDataset.push(item.infectious);
+        });
+        setPredictedChartObject({
+          labels : label2,
+          datasets : [
+            {
+              label : `${query.replace('/','')}`,
+              data : predictedDataset
+            }
+          ]
+        });
+      } 
 
 
       fetchData();
+      sendData();
         
         
        
@@ -145,11 +195,23 @@ const CountryMap = ()=>{
             {
               
             }
-            <Line data={chartObject}/>
+            <p>{query.replace('/','')} Predicted Chart</p>
+            <Line data={predictedChartObject}/>
           </Col>
         </Row>
-        
-        
+      </div>
+
+      <div className="middle-chart-1">
+            <p>{query.replace('/','')} Confirmed Chart</p>
+            <Line data={confirmedChartObject}/>
+      </div>
+      <div className="middle-chart-1">
+            <p>{query.replace('/','')} Death Chart</p>
+            <Line data={deathChartObject}/>
+      </div>
+      <div className="middle-chart-2">
+            <p>{query.replace('/','')} Recovered Chart</p>
+            <Line data={recoveredChartObject}/>
       </div>
     </>
     )
