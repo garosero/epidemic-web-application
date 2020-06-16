@@ -21,6 +21,7 @@ db.Country = require('./country')(sequelize,Sequelize);
 db.Cases = require('./cases')(sequelize,Sequelize);
 db.Diseases = require('./diseases')(sequelize,Sequelize);
 db.Predicted = require('./predicted_case')(sequelize,Sequelize);
+db.Rsquare = require('./rsquare')(sequelize,Sequelize);
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

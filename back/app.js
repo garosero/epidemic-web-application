@@ -6,6 +6,7 @@ const countryAPIRouter = require('./routes/country');
 const diseaseAPIRouter = require('./routes/disease');
 const caseAPIRouter = require('./routes/cases');
 const predictedAPIRouter = require('./routes/predicted');
+const rsquareAPIRouter = require('./routes/rsquare');
 
 db.sequelize.sync()
     .then(()=> {
@@ -27,6 +28,7 @@ app.use('/api/country',countryAPIRouter);
 app.use('/api/disease',diseaseAPIRouter);
 app.use('/api/cases',caseAPIRouter);
 app.use('/api/predicted',predictedAPIRouter);
+app.use('/api/rsquare',rsquareAPIRouter);
 
 
 

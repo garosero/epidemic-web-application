@@ -63,7 +63,6 @@ const AppLayout = ({children}) => {
                         <UpMenu className="menu" inlineIndent={20} mode="horizontal">
                             <UpMenu.Item key="home"><Link href="/"><a>Home</a></Link></UpMenu.Item>
                             <UpMenu.Item key="country"><Link href="/country"><a>Country</a></Link></UpMenu.Item>
-                            <UpMenu.Item key="statistics"><Link href="/statistics"><a>Statistics</a></Link></UpMenu.Item>
                         </UpMenu>
                     </Col> 
                     <Col span={3}>

@@ -29,6 +29,7 @@
 
 
   .Map svg{
+    margin-top : 70px;
     width : 700px;
     height : 500px;
 
@@ -84,10 +85,17 @@
       margin-bottom: 150px;
     }
 
+    .rs {
+      text-align : right;
+      font-size: 13px;
+      font-weight: lighter;
+    }
+
     p {
       font-size : 20px;
       text-align: center;
       margin : 0 auto;
       font-weight: bold;
+      padding-top: 25px;
       
     }
