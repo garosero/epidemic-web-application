@@ -80,6 +80,9 @@ const CountryMap = ()=>{
     useEffect(()=> {
         const fetchData = async()=> {
           var allData = await axios.get(baseUrl+disease+query);
+          if(!allData){
+            console.log("No Data");
+          }
           const data = allData.data; 
           // const criteriaData = success.data; 
           // console.log(criteriaData);
@@ -122,12 +125,16 @@ const CountryMap = ()=>{
 
       const sendData = async() =>{
         var fittingData = await axios.get(web.base_URI+'/predicted/'+disease+query);
+        if(!fittingData){
+          console.log("No Data");
+        }
         const fitData = fittingData.data;
         fitData.map(item=>{
           label2.push(item.days);
           predictedDataset.push(item.infectious);
         });
         setFinalDays(label2[label2.length-1]);
+        console.log("final : "+finalDays);
         var inputDate = String(label[0]).split('-');
         date = new Date(parseInt(inputDate[0]),parseInt(inputDate[1]),parseInt(inputDate[2]));
         date.setDate(date.getDate() + finalDays)
@@ -148,6 +155,7 @@ const CountryMap = ()=>{
       var criteriaData = async()=>{
         var successData = await axios.get(web.base_URI+'/rsquare/'+disease+query);
         var r = successData.data;
+        console.log(r.Rsquare);
         setCriteria(r.Rsquare);
         // console.log(criteria.Rsquare);
       }
@@ -169,6 +177,7 @@ const CountryMap = ()=>{
       if (current && current.value){ 
          let countryUpper = current.value[0].toUpperCase();
          let countryLower = current.value.substr(1); //첫번째 문자 제거
+         console.log("search : "+countryUpper+countryLower.toLowerCase());
          setQuery("/"+countryUpper+countryLower);
       }
     };

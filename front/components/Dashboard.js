@@ -21,7 +21,10 @@ const Dashboard = ()=> {
     useEffect(()=>{
         const fetchToday = async () => {
             const today = await axios(url+disease+'/confirmed/1');
+            console.log(url+disease+'/confirmed/1')
+            console.log("today" + today.data.confirmed);
             setTodayData(today.data);   
+            console.log('base :'+web.base_URI);
         }
         
         fetchToday();
@@ -30,6 +33,7 @@ const Dashboard = ()=> {
     useEffect(()=>{
         const fetchYesterday = async() => {
             const yesterday = await axios(url+disease+'/confirmed/2');
+            console.log("yesterday" + (yesterday.data.confirmed));
             setYesterData(yesterday.data);
             
         };
