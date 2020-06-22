@@ -14,8 +14,6 @@ const SearchCountry = () => {
     useEffect(()=> {
         const fetchData = async ()=> {
             const result = await axios(`http://localhost:8080/api/country/${query}`);
-            console.log(result.data);
-            console.log(result)
             setDatas(result.data);
         };
 

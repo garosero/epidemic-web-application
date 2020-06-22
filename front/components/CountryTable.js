@@ -53,7 +53,6 @@ const CountryTable = () => {
     },[disease]);
 
     function onChange(pagination, filters, sorter, extra){
-        console.log('params',pagination,filters,sorter,extra);
     }
 
     return (
