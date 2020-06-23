@@ -8,7 +8,7 @@
 
 ### 2.second page
 
-![web-2](https://user-images.githubusercontent.com/39877325/85358586-10f8b500-b54f-11ea-856a-dfe6c2205ed5.png)
+![web-2](https://user-images.githubusercontent.com/39877325/85358866-b9a71480-b54f-11ea-9031-c69e398e3a77.png)
 
 * 지도로 원하는 국가 클릭 시, 해당 국가의 확진자, 사망자, 치료자, 종식 날짜 예측 info 제공
 
